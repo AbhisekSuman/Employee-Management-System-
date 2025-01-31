@@ -17,6 +17,8 @@ public class EmployeeApp {
 	 PreparedStatement preparedStatement = null;
 	 Statement statement = null;
 	 ResultSet resultset = null;
+	 
+	 
 	 {
 		try {
 			Class.forName(path);
@@ -79,11 +81,11 @@ public class EmployeeApp {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(connection != null)
+//				if(connection != null)
 					connection.close();
 				statement.close();
 				resultset.close();
-			} catch (Exception e2) {
+			} catch (Exception e2) {		
 				// TODO: handle exception
 				e2.printStackTrace();
 			}
@@ -139,7 +141,7 @@ public class EmployeeApp {
 //			} catch (Exception e2) {
 //				// TODO: handle exception
 //				e2.printStackTrace();
-//			}
+//			}	
 			
 		}
 	}

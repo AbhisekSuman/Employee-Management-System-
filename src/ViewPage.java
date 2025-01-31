@@ -42,10 +42,7 @@ public class ViewPage extends JFrame {
 	 */
 	public ViewPage(int id, JFrame callerFrame) {
 		
-
-		
 		ImageIcon img = new ImageIcon("E:\\Kodenest\\EmployeeManagementSystem\\src\\images\\profileicon.png");
-		// Scale the image to desired size (e.g., 100x100)
         Image scaledImage = img.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH); // Change 100x100 to desired size
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
 		
@@ -60,9 +57,7 @@ public class ViewPage extends JFrame {
 		
 		JLabel profileicon = new JLabel();
 		profileicon.setIcon(scaledIcon);
-		 // Set size to the image's natural size for better display
         profileicon.setBounds(139, 10, 250, 260);
-//		profileicon.setBounds(465, 51, 45, 13);
 		contentPane.add(profileicon);
 		
 		EmployeeApp emp = new EmployeeApp();

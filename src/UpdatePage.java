@@ -79,11 +79,18 @@ public class UpdatePage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String name = nameField.getText();
 				String dept = deptField.getText();
-				int sal = Integer.parseInt(salField.getText());
+				MessageBox messageBox = new MessageBox();
 				EmployeeApp emp = new EmployeeApp();
+				
+				if (name.isBlank() || name.isEmpty() || name.equals("") || dept.isBlank() || dept.isEmpty() || dept.equals("")
+						|| salField.getText().isBlank() || salField.getText().isEmpty() || !salField.getText().matches("[0-9]*")) {
+					messageBox.showMessage("Enter all valid Details");
+					return;
+				}
+				
+				int sal = Integer.parseInt(salField.getText());
 				try {					
 					emp.updateEmployee(id, name, dept, sal);
-					MessageBox messageBox = new MessageBox();
 					messageBox.showMessage("Updated Succesfully");
 					frame.setVisible(true);
 				} catch (Exception e2) {

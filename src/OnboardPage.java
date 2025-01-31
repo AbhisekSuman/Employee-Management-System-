@@ -75,13 +75,22 @@ public class OnboardPage extends JFrame {
 		JButton addButton = new JButton("ONBOARD");
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				String name = nameField.getText();
 				String dept = deptField.getText();
-				int sal = Integer.parseInt(salField.getText());
+				String salary = salField.getText();
 				EmployeeApp emp = new EmployeeApp();
+				MessageBox message = new MessageBox();
+				
+				if (name.isBlank() || name.isEmpty() || name.equals("") || dept.isBlank() || dept.isEmpty() || dept.equals("")
+						|| salary.isBlank() || salary.isEmpty() || !salary.matches("[0-9]*")) {
+					message.showMessage("Enter all valid Details");
+					return;
+				}
+				
+				int sal = Integer.parseInt(salary);
 				
 				emp.addEmployee(name, dept, sal);
-				MessageBox message = new MessageBox();
 				message.showMessage("Employee Onboarded SuccessFully");
 				frame.setVisible(true);
 				setVisible(false);

@@ -61,7 +61,7 @@ public class HomePage {
 
 	/**
 	 * Create the application.
-	 */
+ 	 */
 	public HomePage() {
 		initialize();
 	}
@@ -95,6 +95,11 @@ public class HomePage {
 		JButton searchBtn = new JButton("🔍");
 		searchBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (searchTxt.getText().isBlank() || searchTxt.getText().isEmpty() || !searchTxt.getText().matches("[0-9]*"))
+				{
+					new MessageBox().showMessage("Enter a Valid ID");
+					return;
+				}
 				int id = Integer.parseInt(searchTxt.getText());
 				
 				EmployeeApp emp = new EmployeeApp();
@@ -140,7 +145,8 @@ public class HomePage {
         table.getTableHeader().setOpaque(false);
         table.getTableHeader().setBackground(new Color(32, 136, 203));
         table.getTableHeader().setForeground(Color.WHITE);
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 24));
+        table.getTableHeader().setFont(new Font("Castellar", Font.BOLD, 24));
+//        table.getTableHeader().
 		
 		// Wrap the JTable in a JScrollPane
 		JScrollPane scrollPane = new JScrollPane(table);
@@ -165,14 +171,14 @@ public class HomePage {
 		refershBtn.setBounds(918, 110, 65, 43);
 		frame.getContentPane().add(refershBtn);
 		
-		JLabel lblNewLabel_1 = new JLabel("©️KODNEST | ALL RIGHTS RESERVER");
+		JLabel lblNewLabel_1 = new JLabel("©️KODNEST | ALL RIGHTS RESERVED");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 14));
 		lblNewLabel_1.setBounds(409, 646, 381, 13);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("EMPLOYEES");
-		lblNewLabel_2.setFont(new Font("Arial Black", Font.PLAIN, 16));
+		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(569, 145, 146, 13);
 		frame.getContentPane().add(lblNewLabel_2);
@@ -230,7 +236,9 @@ public class HomePage {
 	// Custom Renderer for the Actions column
     static class ActionRenderer extends JPanel implements TableCellRenderer {
 
-        public ActionRenderer() {
+		private static final long serialVersionUID = 1L;
+
+		public ActionRenderer() {
             setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
         }
 
@@ -238,16 +246,19 @@ public class HomePage {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                                                        boolean hasFocus, int row, int column) {
             this.removeAll(); // Clear previous buttons
-            add(createButton("View", row));
-            add(createButton("Edit", row));
-            add(createButton("Delete", row));
+            add(createButton(row, "/images/icons8-view-24.png"));
+            add(createButton(row, "/images/icons8-edit-30.png"));
+            add(createButton(row, "/images/icons8-delete-24.png"));
             return this;
         }
 
-        private JButton createButton(String text, int row) {
-            JButton button = new JButton(text);
+        private JButton createButton(int row, String path) {
+            JButton button = new JButton("");
             button.setFont(new Font("Tahoma", Font.PLAIN, 14));
             button.setFocusable(false);
+            button.setBackground(new Color(255, 255, 255));
+            button.setBounds(885, 563, 57, 28);
+            button.setIcon(new ImageIcon(HomePage.class.getResource(path)));
             return button;
         }
     }
@@ -262,13 +273,30 @@ public class HomePage {
             this.table = table;
             panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
 
-            viewButton = new JButton("View");
-            editButton = new JButton("Edit");
-            deleteButton = new JButton("Delete");
+            viewButton = new JButton("");
+            editButton = new JButton("");
+            deleteButton = new JButton("");
+            
+            viewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            viewButton.setFocusable(false);
+            viewButton.setBackground(new Color(255, 255, 255));
+            viewButton.setBounds(885, 563, 57, 28);
+            viewButton.setIcon(new ImageIcon(HomePage.class.getResource("/images/icons8-view-24.png")));
 
+            editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            editButton.setFocusable(false);
+            editButton.setBackground(new Color(255, 255, 255));
+            editButton.setBounds(885, 563, 57, 28);
+            editButton.setIcon(new ImageIcon(HomePage.class.getResource("/images/icons8-edit-30.png")));
+            
+            deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            deleteButton.setFocusable(false);
+            deleteButton.setBackground(new Color(255, 255, 255));
+            deleteButton.setBounds(885, 563, 57, 28);
+            deleteButton.setIcon(new ImageIcon(HomePage.class.getResource("/images/icons8-delete-24.png")));
+            
             // Add Action Listeners for buttons
-            viewButton.addActionListener(new ActionListener() {
-				
+            viewButton.addActionListener(new ActionListener() {	
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					 int row = table.getSelectedRow(); // Get the selected row
@@ -283,9 +311,8 @@ public class HomePage {
 				}
 				}
 			});
-           
-            editButton.addActionListener(new ActionListener() {
-				
+         
+            editButton.addActionListener(new ActionListener() {		
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					int row = table.getSelectedRow(); // Get the selected row
@@ -307,6 +334,7 @@ public class HomePage {
 			} 
 				}
 			});
+            
             deleteButton.addActionListener(new ActionListener() {
 				
 				@Override
