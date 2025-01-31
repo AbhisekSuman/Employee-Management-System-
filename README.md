@@ -91,8 +91,8 @@ This project is for educational purposes and follows an **open-source** model.
 ## 👤 Author  
 Developed by **[Abhisek Nayak]**  
 
-📧 Contact: [Your Email]  
-🔗 GitHub: [Your GitHub Profile](https://github.com/your-github-username)  
+📧 Contact: [cv07abhisek@gmail.com]  
+🔗 GitHub: [https://github.com/AbhisekSuman]  
 
 ---
 
